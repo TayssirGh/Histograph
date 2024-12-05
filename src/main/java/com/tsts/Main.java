@@ -1,6 +1,8 @@
 package com.tsts;
 
-import com.tsts.utils.MainCommand;
+import com.tsts.commands.AddCommand;
+import com.tsts.commands.EmailCommand;
+import com.tsts.commands.MainCommand;
 import picocli.CommandLine;
 
 @CommandLine.Command(
@@ -11,6 +13,8 @@ import picocli.CommandLine;
 public class Main implements Runnable{
     public static void main(String[] args) {
         int exitCode = new CommandLine(new MainCommand())
+//                .addSubcommand("add", new AddCommand())
+                .addSubcommand("email", new EmailCommand())
                 .execute(args);
         System.exit(exitCode);
     }
