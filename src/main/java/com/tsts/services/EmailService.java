@@ -1,24 +1,16 @@
-package com.tsts.commands;
+package com.tsts.services;
 
-import com.tsts.utils.Utils;
+import com.tsts.services.utils.Utils;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.revwalk.RevCommit;
-import picocli.CommandLine;
 
 import java.io.File;
 import java.time.LocalDate;
 import java.util.*;
 
-@CommandLine.Command(name = "email", description = "Analyze commits for a specific email.")
-public class EmailCommand implements Runnable {
-
-    @CommandLine.Parameters(paramLabel = "EMAIL", description = "Email address to analyze commits for")
-    private String email;
-
+public class EmailService {
     private static final int DAYS_IN_LAST_SIX_MONTHS = 183;
-
-    @Override
-    public void run() {
+    public void showActivity(String email) {
         List<String> repositories = Utils.loadRepositories();
         if (repositories.isEmpty()) {
             System.out.println("No repositories found. Use the 'add' command first.");
@@ -51,6 +43,7 @@ public class EmailCommand implements Runnable {
         }
 
         printGraph(commitCounts);
+
     }
 
     private boolean isWithinLastSixMonths(LocalDate date) {
@@ -122,7 +115,7 @@ public class EmailCommand implements Runnable {
 
     private String formatCell(int commits) {
         String escape = "\033[0;37m"; // Default color
-         if (commits > 0 && commits < 5) {
+        if (commits > 0 && commits < 5) {
             escape = "\033[1;30;47m"; // Light gray
         } else if (commits >= 5 && commits < 10) {
             escape = "\033[1;30;43m"; // Yellow
@@ -133,7 +126,4 @@ public class EmailCommand implements Runnable {
         return String.format(escape + " %2d " + "\033[0m", commits);
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
 }

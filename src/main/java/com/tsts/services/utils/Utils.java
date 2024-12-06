@@ -1,4 +1,4 @@
-package com.tsts.utils;
+package com.tsts.services.utils;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -40,6 +40,8 @@ public class Utils {
             for (String repo : repositories) {
                 writer.write(repo);
                 writer.newLine();
+                System.out.println("Repositories added successfully.");
+
             }
         } catch (IOException e) {
             System.err.println("Failed to save repositories: " + e.getMessage());
