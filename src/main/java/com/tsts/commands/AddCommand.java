@@ -23,5 +23,9 @@ public class AddCommand implements Runnable {
         Utils.saveRepositories(repositories);
         System.out.println("Repositories added successfully.");
     }
+
+    public void setFolderPath(String folderPath) {
+        this.folderPath = folderPath;
+    }
 }
 

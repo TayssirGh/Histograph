@@ -5,24 +5,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Utils {
-    private static final String CONFIG_FILE = System.getProperty("user.home") + "/.gogitlocalstats";
+    private static final String CONFIG_FILE = System.getProperty("user.home") + "/histograph";
 
     public static List<String> scanGitRepositories(File folder) {
         List<String> repositories = new ArrayList<>();
+        boolean hasGit = scanGitRepositoriesHelper(folder, repositories);
+        if (!hasGit) {
+            System.out.println("No git repositories found");
+        }
+
+        return repositories;
+    }
+
+    private static boolean scanGitRepositoriesHelper(File folder, List<String> repositories) {
+        boolean foundGit = false;
         File[] files = folder.listFiles();
-        if (files == null) return repositories;
+        if (files == null) return false;
 
         for (File file : files) {
             if (file.isDirectory()) {
-                if (new File(file, ".git").exists()) {
-                    repositories.add(file.getAbsolutePath());
-                } else {
-                    repositories.addAll(scanGitRepositories(file));
+                if (file.getName().endsWith(".git")) {
+                    repositories.add(folder.getAbsolutePath());
+                    return true;
                 }
+                foundGit |= scanGitRepositoriesHelper(file, repositories); // Recursively scan
             }
         }
-        return repositories;
+        return foundGit;
     }
+
 
     public static void saveRepositories(List<String> repositories) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(CONFIG_FILE, true))) {
