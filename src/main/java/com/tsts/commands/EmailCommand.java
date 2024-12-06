@@ -132,4 +132,8 @@ public class EmailCommand implements Runnable {
 
         return String.format(escape + " %2d " + "\033[0m", commits);
     }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
