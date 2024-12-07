@@ -9,6 +9,9 @@ import java.time.Instant;
 import java.util.*;
 
 public class RepoStatsService {
+    private static final String ANSI_RESET = "\u001B[0m";
+    private static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
+    private static final String ANSI_BOLD = "\u001B[1m";
 
     public void displayStats(String email) {
         List<String> repositories = Utils.loadRepositories();
@@ -50,26 +53,40 @@ public class RepoStatsService {
     }
 
     private void printTopRepositories(Map<String, Integer> repoCommitCounts) {
-        System.out.println("\n--- Top Repositories ---");
+        System.out.println(ANSI_BOLD + ANSI_YELLOW_BACKGROUND +"\n--- Top Repositories \uD83C\uDFC6 ---"+ ANSI_RESET);
         repoCommitCounts.entrySet().stream()
                 .sorted((e1, e2) -> Integer.compare(e2.getValue(), e1.getValue()))
                 .limit(3)
-                .forEach(entry -> System.out.printf("Repository: %s, Commits: %d%n", entry.getKey(), entry.getValue()));
+                .forEach(entry -> {
+                    String repoName = new File(entry.getKey()).getName();
+                    System.out.printf("%-20s \u001b[38;5;37m->\u001b[0m %d%n", repoName, entry.getValue());
+                });
     }
 
     private void printActivityDistribution(Map<String, Integer> repoCommitCounts) {
-        System.out.println("\n--- Repository Activity Distribution ---");
+        System.out.println(ANSI_BOLD + ANSI_YELLOW_BACKGROUND +
+                "\n--- Repository Activity Distribution \uD83D\uDCCA ---"+ ANSI_RESET);
         int totalCommits = repoCommitCounts.values().stream().mapToInt(Integer::intValue).sum();
         repoCommitCounts.forEach((repo, count) -> {
+            String repoName = new File(repo).getName();
             double percentage = (count / (double) totalCommits) * 100;
-            System.out.printf("Repository: %s, Contribution: %.2f%%%n", repo, percentage);
+            String bar = generateBar(percentage);
+            System.out.printf("%-30s | %-6.2f \u001B[38;5;37m%%\u001B[0m | \u001b[38;5;37m%s%n\u001b[0m", repoName, percentage, bar);
         });
     }
 
+    private String generateBar(double percentage) {
+        int barLength = (int) (percentage / 2);
+        return "\uD83D\uDFE6".repeat(barLength) ;
+    }
+
     private void printLastActiveRepository(Map<String, Instant> lastCommitTimes) {
-        System.out.println("\n--- Last Active Repository ---");
+        System.out.println(ANSI_BOLD + ANSI_YELLOW_BACKGROUND +"\n--- Last Active Repository \uD83D\uDD0E ---"+ ANSI_RESET);
         lastCommitTimes.entrySet().stream()
                 .max(Map.Entry.comparingByValue())
-                .ifPresent(entry -> System.out.printf("Repository: %s, Last Commit Time: %s%n", entry.getKey(), entry.getValue()));
+                .ifPresent(entry -> {
+                    String repoName = new File(entry.getKey()).getName();
+                    System.out.printf("%s : %s%n", repoName, entry.getValue());
+                });
     }
 }
