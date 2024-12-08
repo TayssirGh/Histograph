@@ -53,7 +53,7 @@ public class RepoStatsService {
     }
 
     private void printTopRepositories(Map<String, Integer> repoCommitCounts) {
-        System.out.println(ANSI_BOLD + ANSI_YELLOW_BACKGROUND +"\n--- Top Repositories \uD83C\uDFC6 ---"+ ANSI_RESET);
+        System.out.println(ANSI_BOLD + ANSI_YELLOW_BACKGROUND +"--- Top Repositories \uD83C\uDFC6 ---"+ ANSI_RESET);
         repoCommitCounts.entrySet().stream()
                 .sorted((e1, e2) -> Integer.compare(e2.getValue(), e1.getValue()))
                 .limit(3)
@@ -65,7 +65,7 @@ public class RepoStatsService {
 
     private void printActivityDistribution(Map<String, Integer> repoCommitCounts) {
         System.out.println(ANSI_BOLD + ANSI_YELLOW_BACKGROUND +
-                "\n--- Repository Activity Distribution \uD83D\uDCCA ---"+ ANSI_RESET);
+                "--- Repository Activity Distribution \uD83D\uDCCA ---"+ ANSI_RESET);
         int totalCommits = repoCommitCounts.values().stream().mapToInt(Integer::intValue).sum();
         repoCommitCounts.forEach((repo, count) -> {
             String repoName = new File(repo).getName();
@@ -81,7 +81,7 @@ public class RepoStatsService {
     }
 
     private void printLastActiveRepository(Map<String, Instant> lastCommitTimes) {
-        System.out.println(ANSI_BOLD + ANSI_YELLOW_BACKGROUND +"\n--- Last Active Repository \uD83D\uDD0E ---"+ ANSI_RESET);
+        System.out.println(ANSI_BOLD + ANSI_YELLOW_BACKGROUND +"--- Last Active Repository \uD83D\uDD0E ---"+ ANSI_RESET);
         lastCommitTimes.entrySet().stream()
                 .max(Map.Entry.comparingByValue())
                 .ifPresent(entry -> {

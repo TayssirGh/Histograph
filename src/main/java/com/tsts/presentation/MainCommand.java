@@ -7,7 +7,7 @@ import picocli.CommandLine;
         mixinStandardHelpOptions = true,
         description = "Git local stats utility",
         version = "histograph (1.0.0)",
-        subcommands = {AddCommand.class, EmailCommand.class, RepoStatsCommand.class}
+        subcommands = {AddCommand.class, EmailCommand.class, RepoStatsCommand.class, CodingStatsCommand.class}
 )
 public class MainCommand implements Runnable {
     @Override
