@@ -1,10 +1,8 @@
 #!/bin/bash
 
-# Configuration
 PROCESS_NAME="idea"
-LOG_FILE="/home/tayssir/projects/test-hgraph/monitor.log"
+LOG_FILE="$HOME/.monitor.log"
 
-# Monitoring loop
 while true; do
     TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")
     if pgrep -x "$PROCESS_NAME" > /dev/null; then
