@@ -87,6 +87,7 @@ public class RepoStatsService {
                 .ifPresent(entry -> {
                     String repoName = new File(entry.getKey()).getName();
                     System.out.printf("%s : %s%n", repoName, entry.getValue());
+                    System.out.println("\n");
                 });
     }
 }
