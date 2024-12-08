@@ -11,7 +11,7 @@ import java.util.TreeMap;
 public class CodingStatsService {
     private static final String LOG_FILE_PATH = "/home/tayssir/projects/test-hgraph/monitor.log";
     private static final String ANSI_RESET = "\u001B[0m";
-    private static final String ANSI_YELLOW_BACKGROUND = "\u001B[46m";
+    private static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
     private static final String ANSI_BOLD = "\u001B[1m";
     public void displayCodingHours() {
         Map<LocalDate, Long> dailyCodingHours = calculateDailyCodingHours();
@@ -21,10 +21,10 @@ public class CodingStatsService {
             return;
         }
 
-        System.out.println("\n"+ANSI_BOLD+ ANSI_YELLOW_BACKGROUND +"--- Coding Hours Per Day ---" + ANSI_RESET);
+        System.out.println("\n"+ANSI_BOLD+ ANSI_CYAN_BACKGROUND +"--- Coding Hours Per Day ---" + ANSI_RESET);
         printTable(dailyCodingHours);
 
-        System.out.println("\n"+ANSI_BOLD+ ANSI_YELLOW_BACKGROUND +"--- Coding Hours Curve ---" + ANSI_RESET);
+        System.out.println("\n"+ANSI_BOLD+ ANSI_CYAN_BACKGROUND +"--- Coding Hours Curve ---" + ANSI_RESET);
         printCurveTable(dailyCodingHours);
     }
 
