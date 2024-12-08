@@ -14,6 +14,8 @@ public class AddService {
         }
 
         List<String> repositories = Utils.scanGitRepositories(folder);
-        Utils.saveRepositories(repositories);
+        if (!repositories.isEmpty()) {
+            Utils.saveRepositories(repositories);
+        }
     }
 }

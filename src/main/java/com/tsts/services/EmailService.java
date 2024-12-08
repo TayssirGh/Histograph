@@ -11,6 +11,10 @@ import java.util.*;
 public class EmailService {
     private static final int DAYS_IN_LAST_SIX_MONTHS = 183;
     public void showActivity(String email) {
+        if (email == null || email.trim().isEmpty()) {
+            System.out.println("Email address is required.");
+            return;
+        }
         List<String> repositories = Utils.loadRepositories();
         if (repositories.isEmpty()) {
             System.out.println("No repositories found. Use the 'add' command first.");

@@ -54,9 +54,9 @@ public class Utils {
                 if (!existingRepositories.contains(repo.trim())) {
                     writer.write(repo);
                     writer.newLine();
-                    System.out.println("Repository added successfully ✅: ");
+                    System.out.println("Repository added successfully ✅ ");
                 } else {
-                    System.out.println("Repository already exists: ");
+                    System.out.println("Repository already exists ");
                 }
             }
         } catch (IOException e) {
