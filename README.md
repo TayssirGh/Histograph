@@ -23,8 +23,8 @@
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-username/Histograph.git
-   cd Histograph
+   git clone https://github.com/TayssirGh/Histograph.git
+   cd Histograph/hgraph/
 2. **Build the project:**:
    ```bash
    mvn clean package
@@ -34,6 +34,7 @@
 4. **Verify installation:**
    ```bash
     hgraph
+
 If you see the Histograph ASCII logo, you're all set! 🎉
 ![](img.png)
 ---

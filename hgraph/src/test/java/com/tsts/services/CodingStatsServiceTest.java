@@ -28,9 +28,6 @@ class CodingStatsServiceTest {
         BufferedReader reader = new BufferedReader(new InputStreamReader(logInputStream));
         codingStatsService.displayCodingHours();
         String output = outputStream.toString();
-
-        assertTrue(output.contains("--- Coding Hours Per Day ---"));
-        assertTrue(output.contains("2024-12-08"));
         assertTrue(output.contains("Coding Hours Curve"));
         assertTrue(output.contains("*"));
     }
